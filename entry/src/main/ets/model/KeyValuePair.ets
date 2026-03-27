@@ -4,4 +4,10 @@ export class KeyValuePair {
   key: string = ''
   value: string = ''
   enabled: boolean = true
+
+  constructor(key: string = '', value: string = '', enabled: boolean = true) {
+    this.key = key
+    this.value = value
+    this.enabled = enabled
+  }
 }
