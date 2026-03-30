@@ -1,4 +1,20 @@
 export function getStatusColor(code: number): string {
+  if (code >= 200 && code < 300) {
+    return '#52C41A'
+  }
+  if (code >= 300 && code < 400) {
+    return '#1890FF'
+  }
+  if (code >= 400 && code < 500) {
+    return '#FABC16'
+  }
+  if (code > 500) {
+    return '#FF4D4F'
+  }
+  return '#888888'
+}
+
+export function getStatusText(code: number): string {
   const map: Record<number, string> = {
     200: 'OK',
     201: 'Created',

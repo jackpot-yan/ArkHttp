@@ -26,6 +26,6 @@ export struct MethodSelector {
           console.error(`打印选择: ${value}`)
           this.request.method = value
         }
-      }).margin(0).padding(0).borderRadius(5).width('100%').height(30)
+      }).margin(0).padding(0).borderRadius(5).width('100%').height(10)
   }
 }

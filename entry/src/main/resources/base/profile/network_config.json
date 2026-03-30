@@ -1,0 +1,5 @@
+{
+  "network-security-config": {
+    "cleartextTrafficPermitted": true
+  }
+}
