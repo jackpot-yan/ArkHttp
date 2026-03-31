@@ -15,6 +15,10 @@ export struct RequestPage {
     new KeyValuePair('', ''),
     new KeyValuePair('', '')
   ]
+  @State HeadersTable: Array<KeyValuePair> = [
+    new KeyValuePair('', ''),
+    new KeyValuePair('', '')
+  ]
   @State response: HttpResponse = new HttpResponse()
   @State isLoading: boolean = false
   private httpService = HttpService.getInstance()
@@ -47,29 +51,37 @@ export struct RequestPage {
       }.margin(0).padding(0).width('100%').height('10%')
 
       Column() {
-        Tabs() {
-          TabContent() {
-            this.Params()
-          }.tabBar('Params').margin(0).padding(0)
+        Column() {
+          Tabs() {
+            TabContent() {
+              this.Params()
+            }.tabBar('Params').margin(0).padding(0)
 
-          TabContent() {
-            Column() {
-              this.Headers()
-            }
-          }.tabBar('Headers')
+            TabContent() {
+              Column() {
+                this.Headers()
+              }
+            }.tabBar('Headers').margin(0).padding(0)
 
-          TabContent() {
-            Column() {
-              this.Body()
-            }
-          }.tabBar('Body')
+            TabContent() {
+              Column() {
+                this.Body()
+              }
+            }.tabBar('Body')
 
-          TabContent() {
-            Column() {
-              this.Auth()
-            }
-          }.tabBar('Auth')
-        }.vertical(false).scrollable(true)
+            TabContent() {
+              Column() {
+                this.Auth()
+              }
+            }.tabBar('Auth')
+          }.vertical(false).scrollable(true)
+        }.height('48%').width('100%')
+        Divider().strokeWidth(1)       // 线宽（vp）
+          .color('#E5E5E5').margin({bottom: 5})
+        ResponsePanel({
+          response: this.response,
+          isLoading: this.isLoading
+        }).height('50%').width('100%').margin(0).padding(0)
       }.height('90%').width('100%')
     }
   }
@@ -77,18 +89,15 @@ export struct RequestPage {
   @Builder
   Params() {
     Column() {
-      KeyValueEditor({ items: this.ParamsTable, label: 'Params' }).height('50%').padding(0).margin(0).width('100%')
-      Divider().strokeWidth(1)       // 线宽（vp）
-        .color('#E5E5E5')
-      ResponsePanel({
-        response: this.response,
-        isLoading: this.isLoading
-      }).height('50%').width('100%').margin(0).padding(0)
+      KeyValueEditor({ items: this.ParamsTable, label: 'Params' }).height('100%').padding(0).margin(0).width('100%')
     }.justifyContent(FlexAlign.Start).alignItems(HorizontalAlign.Start).width('100%').height('100%')
   }
 
   @Builder
   Headers() {
+    Column() {
+      KeyValueEditor({ items: this.HeadersTable, label: 'Headers' }).height('100%').padding(0).margin(0).width('100%')
+    }.justifyContent(FlexAlign.Start).alignItems(HorizontalAlign.Start).width('100%').height('100%')
   }
 
   @Builder
