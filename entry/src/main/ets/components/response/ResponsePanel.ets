@@ -187,7 +187,7 @@ export struct ResponsePanel {
         // 行号
         Text(`${(index + 1)}`)
           .fontSize(11)
-          .fontColor('#555555')
+          .fontColor('#ffeae5e5')
           .fontFamily('monospace')
           .width(30)
           .textAlign(TextAlign.End)

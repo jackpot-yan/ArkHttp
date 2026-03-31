@@ -17,9 +17,9 @@ export function tokenizeJson(line: string): JsonToken[] {
   const tokens: JsonToken[] = []
   let i = 0
   while (i < line.length) {
-    if (line[i] === '' || line[i] === '\t') {
+    if (line[i] === ' ' || line[i] === '\t') {
       let s = ''
-      while (i < line.length && (line[i] === '' || line[i] === '\t')) {
+      while (i < line.length && (line[i] === ' ' || line[i] === '\t')) {
         s += line[i]
         i++
       }
@@ -33,16 +33,21 @@ export function tokenizeJson(line: string): JsonToken[] {
         if (line[i] === '\\') {
           s += line[i]
           i++
-        }
-        if (i < line.length) {
+          if (i < line.length) {
+            s += line[i]
+            i++
+          }
+        } else {
           s += line[i]
           i++
         }
       }
-      s += '"'
+      if (i < line.length) {
+        s += '"'
+      }
       i++
       let j = i
-      while (j < line.length && line[i] === ' ') {
+      while (j < line.length && line[j] === ' ') {
         j++
       }
       if (j < line.length && line[j] === ':') {
@@ -81,7 +86,9 @@ export function tokenizeJson(line: string): JsonToken[] {
       i += 4
       continue
     }
+    // 推进 i，防止死循环
     tokens.push({ text: line[i], color: '#CCCCCC' })
+    i++
   }
   return tokens
 }

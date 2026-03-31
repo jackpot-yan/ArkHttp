@@ -25,6 +25,11 @@ export struct RequestPage {
     }
     this.isLoading = true
     try {
+      if (this.ParamsTable.length !== 0) {
+        this.requestInfo.params = this.ParamsTable
+      } else {
+        this.requestInfo.params = []
+      }
       this.response = await this.httpService.send(this.requestInfo)
     } finally {
       this.isLoading = false

@@ -1,4 +1,5 @@
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import { prettyJson } from '../main/ets/utils/JsonHighlight'
 
 export default function localUnitTest() {
   describe('localUnitTest', () => {
@@ -29,5 +30,15 @@ export default function localUnitTest() {
       expect(a).assertContain(b);
       expect(a).assertEqual(a);
     });
+    it('should format valid json', 0, () => {
+      const input = `{"item_id":"foo"}`
+      console.log(`打印1`)
+      console.log(JSON.stringify(input))
+      console.log(`打印2`)
+      const s = JSON.stringify(JSON.parse(input), null, 2).split('\n')
+      s.forEach((line: string, index: number) => {
+        console.log(line, index)
+      })
+    })
   });
 }
