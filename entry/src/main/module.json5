@@ -18,12 +18,11 @@
       },
       {
         "name": "ohos.permission.GET_NETWORK_INFO"
-      }
+      },
     ],
     "abilities": [
       {
         "name": "EntryAbility",
-        "networkSecurityConfig": "$profile:network_config",
         "srcEntry": "./ets/entryability/EntryAbility.ets",
         "description": "$string:EntryAbility_desc",
         "icon": "$media:layered_image",
