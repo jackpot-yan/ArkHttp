@@ -6,6 +6,7 @@ import { KeyValueEditor } from '../components/request/ParamsEditor'
 import { HttpResponse } from '../model/HttpResponse'
 import { ResponsePanel } from '../components/response/ResponsePanel'
 import { HttpService } from '../services/HttpService'
+import { BodyRow } from '../components/request/BodyEditor'
 
 @Component
 export struct RequestPage {
@@ -33,6 +34,11 @@ export struct RequestPage {
         this.requestInfo.params = this.ParamsTable
       } else {
         this.requestInfo.params = []
+      }
+      if (this.HeadersTable.length !== 0) {
+        this.requestInfo.headers = this.HeadersTable
+      } else {
+        this.requestInfo.headers = []
       }
       this.response = await this.httpService.send(this.requestInfo)
     } finally {
@@ -76,8 +82,9 @@ export struct RequestPage {
             }.tabBar('Auth')
           }.vertical(false).scrollable(true)
         }.height('48%').width('100%')
+
         Divider().strokeWidth(1)       // 线宽（vp）
-          .color('#E5E5E5').margin({bottom: 5})
+          .color('#E5E5E5').margin({ bottom: 5 })
         ResponsePanel({
           response: this.response,
           isLoading: this.isLoading
@@ -106,6 +113,8 @@ export struct RequestPage {
 
   @Builder
   Body() {
-    TextArea()
+    Column() {
+      BodyRow({ item: this.ParamsTable, request: this.requestInfo }).height('100%').padding(0).margin(0).width('100%')
+    }
   }
 }
